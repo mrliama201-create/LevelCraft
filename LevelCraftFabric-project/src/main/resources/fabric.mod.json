@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 1,
+  "id": "levelcraft",
+  "version": "1.0.0",
+  "name": "LevelCraft",
+  "description": "Server-side player levels from playtime and mining, with rewards.",
+  "environment": "server",
+  "entrypoints": { "main": ["com.example.levelcraft.LevelCraft"] },
+  "depends": {
+    "fabricloader": ">=0.20.1",
+    "minecraft": "26.3",
+    "fabric-api": "*"
+  }
+}
