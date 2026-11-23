@@ -1,0 +1,34 @@
+name: Build LevelCraft
+
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '25'
+
+      - name: Install Gradle
+        run: |
+          wget -q https://services.gradle.org/distributions/gradle-9.6-bin.zip
+          unzip -q gradle-9.6-bin.zip
+          echo "$PWD/gradle-9.6/bin" >> "$GITHUB_PATH"
+
+      - name: Find project and build
+        run: |
+          cd "$(dirname "$(find . -name build.gradle -print -quit)")"
+          gradle build
+
+      - name: Upload JAR
+        uses: actions/upload-artifact@v4
+        with:
+          name: LevelCraft-jar
+          path: '**/build/libs/*.jar'
